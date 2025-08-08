@@ -16,6 +16,8 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# raise Exception(f"ACCOUNT_USERNAME_REQUIRED: {ACCOUNT_USERNAME_REQUIRED}")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -32,7 +34,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 SITE_ID = 1
 
-WEBSITE_URL = os.environ.get('WEBSITE_URL', 'http://localhost:8000')
+WEBSITE_URL = 'http://localhost:8000'
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
@@ -46,7 +48,7 @@ SIMPLE_JWT = {
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USER_NAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = None
 
