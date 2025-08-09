@@ -2,5 +2,5 @@ from django.urls import path
 from . import api
 
 urlpatterns = [
-    path('', api.properties_list, name='properties-list'),
+    path('', api.properties_list, name='api_properties-list'),
 ]

@@ -95,7 +95,7 @@ INSTALLED_APPS = [
     'corsheaders',
     
     'accounts',  # Custom user app
-    'properties',  # Example app for properties
+    'property',  # Example app for property management
 ]
 
 MIDDLEWARE = [
