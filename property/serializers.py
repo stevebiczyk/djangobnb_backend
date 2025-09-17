@@ -7,6 +7,6 @@ class PropertiesListSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'title',
-            'price_per_night',
+            'price',
             'image_url',
         )

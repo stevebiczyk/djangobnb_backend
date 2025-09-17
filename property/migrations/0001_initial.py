@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('title', models.CharField(max_length=255)),
                 ('description', models.TextField()),
-                ('price_per_night', models.IntegerField()),
+                ('price', models.IntegerField()),
                 ('bedrooms', models.IntegerField()),
                 ('bathrooms', models.IntegerField()),
                 ('guests', models.IntegerField()),
