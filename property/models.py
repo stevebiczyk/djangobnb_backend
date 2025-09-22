@@ -10,7 +10,7 @@ class Property(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    price = models.IntegerField()
+    price = models.IntegerField(db_column="price_per_night")
     bedrooms = models.IntegerField()
     bathrooms = models.IntegerField()
     guests = models.IntegerField()
