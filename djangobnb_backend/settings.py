@@ -44,6 +44,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True,
     'SIGNING_KEY': "acomplexkey",
     'ALGORITHM': 'HS512',
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
