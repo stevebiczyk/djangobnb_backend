@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 
 from .forms import PropertyForm
 from .models import Property, Reservation
-from .serializers import PropertiesListSerializer, PropertiesDetailSerializer
+from .serializers import PropertiesListSerializer, PropertiesDetailSerializer, ReservationsListSerializer
 
 @api_view(['GET'])
 @authentication_classes([])
@@ -26,7 +26,20 @@ def properties_detail(request, pk):
     property = Property.objects.get(pk=pk)
     
     serializer = PropertiesDetailSerializer(property, many=False)
-    return JsonResponse({'data':serializer.data})
+    return JsonResponse(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([])
+def property_reservations(request, pk):
+    """
+    List reservations for a specific property.
+    """
+    property = Property.objects.get(pk=pk)
+    reservations = property.reservations.all()
+    
+    serializer = ReservationsListSerializer(reservations, many=True)
+    return JsonResponse(serializer.data)
 
 @api_view(['POST', 'FILES'])
 def create_property(request):
@@ -67,33 +80,9 @@ def book_property(request, pk):
             created_by=request.user
         )
             
+        return JsonResponse({'success': True})
     except Exception as e:
-        print('error', e)
-        return JsonResponse({'error': 'Could not create reservation'}, status=400)
+        print('Error', e)
+
+        return JsonResponse({'success': False})
     
-    
-    # property = Property.objects.get(pk=pk)
-    # start_date = request.data.get('start_date')
-    # end_date = request.data.get('end_date')
-    # guests = request.data.get('guests')
-
-    # # Calculate number of nights
-    # from datetime import datetime
-    # start = datetime.strptime(start_date, '%Y-%m-%d')
-    # end = datetime.strptime(end_date, '%Y-%m-%d')
-    # number_of_nights = (end - start).days
-
-    # total_price = number_of_nights * property.price
-
-    # from .models import Reservation
-    # reservation = Reservation.objects.create(
-    #     property=property,
-    #     start_date=start_date,
-    #     end_date=end_date,
-    #     number_of_nights=number_of_nights,
-    #     guests=guests,
-    #     total_price=total_price,
-    #     created_by=request.user
-    # )
-
-    return JsonResponse({'success': True, 'reservation_id': str(reservation.id)})
