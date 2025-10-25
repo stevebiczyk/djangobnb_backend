@@ -13,6 +13,14 @@ def properties_list(request):
     List all properties.
     """
     properties = Property.objects.all()
+    #
+    # Filter by landlord ID if provided
+    
+    landlord_id = request.GET.getlist('landlord_id', '')
+    if landlord_id:
+        properties = properties.filter(landlord__id=landlord_id)
+    #
+    # Serialize and return the data
     serializer = PropertiesListSerializer(properties, many=True)
     return JsonResponse(serializer.data, safe=False)
 
