@@ -39,7 +39,7 @@ def property_reservations(request, pk):
     reservations = property.reservations.all()
     
     serializer = ReservationsListSerializer(reservations, many=True)
-    return JsonResponse(serializer.data)
+    return JsonResponse(serializer.data, safe=False)
 
 @api_view(['POST', 'FILES'])
 def create_property(request):
