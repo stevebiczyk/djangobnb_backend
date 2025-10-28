@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework import status
+import uuid
 
 from .forms import PropertyForm
 from .models import Property, Reservation
@@ -18,7 +20,7 @@ def properties_list(request):
     
     landlord_id = request.GET.getlist('landlord_id', '')
     if landlord_id:
-        properties = properties.filter(landlord__id=landlord_id)
+        properties = properties.filter(landlord__id__in=landlord_id)
     #
     # Serialize and return the data
     serializer = PropertiesListSerializer(properties, many=True)
