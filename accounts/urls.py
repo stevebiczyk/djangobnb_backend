@@ -16,5 +16,6 @@ urlpatterns = [
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("token/verify/", TokenVerifyView.as_view(), name="token_verify"),
+    path("myreservations/", api.reservations_list, name="reservations_list"),
     path("<uuid:pk>/", api.landlord_details, name="landlord_details"),
 ]
