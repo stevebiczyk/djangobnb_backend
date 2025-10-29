@@ -15,9 +15,11 @@ def landlord_details(request, pk):
     return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
-def reservations_list(request):
+@authentication_classes([])
+@permission_classes([])
+def my_reservations(request):
     """
-    List all reservations.
+    List my reservations.
     """
     reservations = request.user.reseevations.all()    
     serializer = ReservationsListSerializer(reservations, many=True)

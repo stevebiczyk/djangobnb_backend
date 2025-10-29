@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework import status
 import uuid
 
@@ -50,6 +52,21 @@ def property_reservations(request, pk):
     
     serializer = ReservationsListSerializer(reservations, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def my_reservations(request):
+    """
+    List my reservations.
+    """
+    qs = (
+        Reservation.objects
+        .filter(created_by=request.user)
+        .select_related("property")
+        .order_by("-created_at")
+    )
+    serializer = ReservationsListSerializer(qs, many=True, context={"request": request})
+    return Response(serializer.data)
 
 @api_view(['POST', 'FILES'])
 def create_property(request):
