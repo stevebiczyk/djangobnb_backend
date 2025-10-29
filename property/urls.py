@@ -8,4 +8,6 @@ urlpatterns = [
     path('<uuid:pk>/booking/', api.book_property, name='api_book_property'),
     path('reservations/mine/', api.my_reservations, name='my_reservations'),
     path('<uuid:pk>/reservations/', api.property_reservations, name='api_property_reservations'),
+    path('<uuid:pk>/toggle_favorite/', api.toggle_favorite, name='toggle_favorite'),
+    # path('toggle_favorite/', api.toggle_favorite, name='api_toggle_favorite'),
 ]
