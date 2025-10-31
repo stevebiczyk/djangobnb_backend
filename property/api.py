@@ -16,7 +16,9 @@ def properties_list(request):
 
     properties = Property.objects.all()
     
-    # ✅ Expect a single landlord_id, not a list
+    
+    is_favorites = request.GET.get('is_favorites', "")
+
     landlord_id = request.GET.get('landlord_id')
     if landlord_id:
         # Optional: validate it’s a UUID so you return 400 not 500 on bad input
@@ -28,6 +30,10 @@ def properties_list(request):
                 status=400
             )
         properties = properties.filter(landlord_id=landlord_id)
+        
+    if is_favorites:
+        properties = properties.filter(favorited__id=request.user.id)
+        
 
     # Serialize the properties
     data = PropertiesListSerializer(properties, many=True).data
