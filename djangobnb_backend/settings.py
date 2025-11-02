@@ -97,6 +97,7 @@ INSTALLED_APPS = [
     
     'corsheaders',
     
+    'chat',  # Chat application
     'accounts',  # Custom user app
     'property',  # App for property management
 ]
