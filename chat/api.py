@@ -6,7 +6,7 @@ from .models import Conversation
 from .serializers import ConversationListSerializer
 
 @api_view(["GET"])
-def conversation_list(request):
+def conversations_list(request):
     serializer = ConversationListSerializer(request.user.conversations.all(), many=True)
     
     return Response(serializer.data)
